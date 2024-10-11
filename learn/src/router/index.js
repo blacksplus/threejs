@@ -6,6 +6,8 @@ import position from '@/views/position.vue'
 import scaleAndRotation from '@/views/scaleAndRotation.vue'
 import adaptiveWindow from '@/views/adaptiveWindow.vue'
 import lilguiController from '@/views/lilguiController.vue'
+import bufferGeometry from '@/views/bufferGeometry.vue'
+import groupMaterial from '@/views/groupMaterial.vue'
 
 Vue.use(VueRouter)
 
@@ -43,6 +45,16 @@ const routes = [
     path: '/lilguiController',
     name: 'lilguiController',
     component: lilguiController
+  },
+  {
+    path: '/bufferGeometry',
+    name: 'bufferGeometry',
+    component: bufferGeometry
+  },
+  {
+    path: '/groupMaterial',
+    name: 'groupMaterial',
+    component: groupMaterial
   }
 ]
 
