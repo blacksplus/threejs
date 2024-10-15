@@ -8,6 +8,9 @@ import adaptiveWindow from '@/views/adaptiveWindow.vue'
 import lilguiController from '@/views/lilguiController.vue'
 import bufferGeometry from '@/views/bufferGeometry.vue'
 import groupMaterial from '@/views/groupMaterial.vue'
+import textureload from '@/views/textureload.vue'
+import gltfloadAndFog from '@/views/gltfloadAndFog.vue'
+import raycaster from '@/views/raycaster.vue'
 
 Vue.use(VueRouter)
 
@@ -55,6 +58,21 @@ const routes = [
     path: '/groupMaterial',
     name: 'groupMaterial',
     component: groupMaterial
+  },
+  {
+    path: '/textureload',
+    name: 'textureload',
+    component: textureload
+  },
+  {
+    path: '/gltfloadAndFog',
+    name: 'gltfloadAndFog',
+    component: gltfloadAndFog
+  },
+  {
+    path: '/raycaster',
+    name: 'raycaster',
+    component: raycaster
   }
 ]
 
