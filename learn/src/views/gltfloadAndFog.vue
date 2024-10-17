@@ -49,9 +49,11 @@ export default {
             })
 
 
-            //添加雾 颜色 开始距离 最远距离完全这个颜色
+            //添加黑色线性雾 颜色 开始距离 最远距离完全这个颜色
             scene.fog = new THREE.Fog(0x000000, 0.1, 50)
 
+            //添加指数雾 颜色 浓度
+            // scene.fog = new THREE.FogExp2(0x000000, 0.5)
             animate()
 
             function animate() {

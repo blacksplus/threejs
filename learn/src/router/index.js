@@ -11,6 +11,9 @@ import groupMaterial from '@/views/groupMaterial.vue'
 import textureload from '@/views/textureload.vue'
 import gltfloadAndFog from '@/views/gltfloadAndFog.vue'
 import raycaster from '@/views/raycaster.vue'
+import tween from '@/views/tween.vue'
+import uv from '@/views/uv.vue'
+import normalVectors from '@/views/normalVectors.vue'
 
 Vue.use(VueRouter)
 
@@ -73,6 +76,22 @@ const routes = [
     path: '/raycaster',
     name: 'raycaster',
     component: raycaster
+  },
+  {
+    path: '/tween',
+    name: 'tween',
+    component: tween
+  },
+  ,
+  {
+    path: '/uv',
+    name: 'uv',
+    component: uv
+  },
+  {
+    path: '/normalVectors',
+    name: 'normalVectors',
+    component: normalVectors
   }
 ]
 
