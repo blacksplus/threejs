@@ -14,6 +14,9 @@ import raycaster from '@/views/raycaster.vue'
 import tween from '@/views/tween.vue'
 import uv from '@/views/uv.vue'
 import normalVectors from '@/views/normalVectors.vue'
+import translateRotationScale from '@/views/translateRotationScale.vue'
+import surroundBoxAndWorldMatrix from '@/views/surroundBoxAndWorldMatrix.vue'
+import edgeGeometryAndWireFrame from '@/views/edgeGeometryAndWireFrame.vue'
 
 Vue.use(VueRouter)
 
@@ -92,6 +95,21 @@ const routes = [
     path: '/normalVectors',
     name: 'normalVectors',
     component: normalVectors
+  },
+  {
+    path: '/translateRotationScale',
+    name: 'translateRotationScale',
+    component: translateRotationScale
+  },
+  {
+    path: '/surroundBoxAndWorldMatrix',
+    name: 'surroundBoxAndWorldMatrix',
+    component: surroundBoxAndWorldMatrix
+  },
+  {
+    path: '/edgeGeometryAndWireFrame',
+    name: 'edgeGeometryAndWireFrame',
+    component: edgeGeometryAndWireFrame
   }
 ]
 
