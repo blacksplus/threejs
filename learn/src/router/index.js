@@ -17,6 +17,9 @@ import normalVectors from '@/views/normalVectors.vue'
 import translateRotationScale from '@/views/translateRotationScale.vue'
 import surroundBoxAndWorldMatrix from '@/views/surroundBoxAndWorldMatrix.vue'
 import edgeGeometryAndWireFrame from '@/views/edgeGeometryAndWireFrame.vue'
+import directionLight from '@/views/directionLight.vue'
+import spotLight from '@/views/spotLight.vue'
+import pointLight from '@/views/pointLight.vue'
 
 Vue.use(VueRouter)
 
@@ -110,6 +113,21 @@ const routes = [
     path: '/edgeGeometryAndWireFrame',
     name: 'edgeGeometryAndWireFrame',
     component: edgeGeometryAndWireFrame
+  },
+  {
+    path: '/directionLight',
+    name: 'directionLight',
+    component: directionLight
+  },
+  {
+    path: '/spotLight',
+    name: 'spotLight',
+    component: spotLight
+  },
+  {
+    path: '/pointLight',
+    name: 'pointLight',
+    component: pointLight
   }
 ]
 

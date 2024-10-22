@@ -37,9 +37,9 @@ export default {
                 gltf.scene.traverse((child) => {
                     if (child.isMesh) {
                         const geometry = child.geometry;
-                        //获取边缘geometry
+                        //获取边缘geometry 组成物体的所有边缘面
                         // const edgeGeometry = new THREE.EdgesGeometry(geometry)
-                        //线框geometry
+                        //线框geometry 组成物体的所有的三角面
                         const edgeGeometry = new THREE.WireframeGeometry(geometry)
                         //创建线段材质
                         const lineMaterial = new THREE.LineBasicMaterial({
