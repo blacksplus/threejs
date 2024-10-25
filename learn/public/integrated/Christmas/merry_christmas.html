@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>圣诞快乐！</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link type="text/css" rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from "./js/three.module.js";
+      import { FBXLoader } from "./jsm/loaders/FBXLoader.js";
+
+      let camera, scene, renderer, parameters;
+
+      let windowHalfX = window.innerWidth / 2;
+      let windowHalfY = window.innerHeight / 2;
+
+      const materials = [];
+
+      init();
+      animate();
+
+      function init() {
+        camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          1,
+          2000
+        );
+        camera.position.set(0, 200, 400);
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.CubeTextureLoader()
+          .setPath("textures/cube/Park3Med/")
+          .load(["px.jpg", "nx.jpg", "py.jpg", "ny.jpg", "pz.jpg", "nz.jpg"]);
+        // 该类所包含的参数定义了指数雾，它可以在相机附近提供清晰的视野，且距离相机越远，雾的浓度随着指数增长越快。
+        scene.fog = new THREE.FogExp2(0x000000, 0.0008);
+        const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+        hemiLight.position.set(0, 200, 0);
+        scene.add(hemiLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff);
+        dirLight.position.set(0, 200, 100);
+        // dirLight.castShadow = true;
+        // dirLight.shadow.camera.top = 180;
+        // dirLight.shadow.camera.bottom = -100;
+        // dirLight.shadow.camera.left = -120;
+        // dirLight.shadow.camera.right = 120;
+        scene.add(dirLight);
+
+        // 是面片、线或点几何体的有效表述。包括顶点位置，面片索引、法相量、颜色值、UV 坐标和自定义缓存属性值。使用 BufferGeometry 可以有效减少向 GPU 传输上述数据所需的开销。
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        // 加载texture的一个类。 内部使用ImageLoader来加载文件
+        const textureLoader = new THREE.TextureLoader();
+
+        const sprite1 = textureLoader.load("textures/sprites/snowflake1.png");
+        const sprite2 = textureLoader.load("textures/sprites/snowflake2.png");
+        const sprite3 = textureLoader.load("textures/sprites/snowflake3.png");
+        const sprite4 = textureLoader.load("textures/sprites/snowflake4.png");
+        const sprite5 = textureLoader.load("textures/sprites/snowflake5.png");
+
+        for (let i = 0; i < 10000; i++) {
+          // -1000至1000的随机范围
+          const x = Math.random() * 2000 - 1000;
+          const y = Math.random() * 2000 - 1000;
+          const z = Math.random() * 2000 - 1000;
+
+          vertices.push(x, y, z);
+        }
+        // 这个类用于存储与BufferGeometry相关联的 attribute
+        // （例如顶点位置向量，面片索引，法向量，颜色值，UV坐标以及任何自定义 attribute ）。
+        // 利用 BufferAttribute，可以更高效的向GPU传递数据。
+        geometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(vertices, 3)
+        );
+
+        parameters = [
+          [[1.0, 0.2, 0.5], sprite2, 20],
+          [[0.95, 0.1, 0.5], sprite3, 15],
+          [[0.9, 0.05, 0.5], sprite1, 10],
+          [[0.85, 0, 0.5], sprite5, 8],
+          [[0.8, 0, 0.5], sprite4, 5],
+        ];
+        // 创建雪花添加至场景中
+        for (let i = 0; i < parameters.length; i++) {
+          const color = parameters[i][0];
+          const sprite = parameters[i][1];
+          const size = parameters[i][2];
+          // 点材质
+          materials[i] = new THREE.PointsMaterial({
+            size: size,
+            map: sprite,
+            blending: THREE.AdditiveBlending,
+            depthTest: false,
+            transparent: true,
+          });
+          materials[i].color.setHSL(color[0], color[1], color[2]);
+
+          const particles = new THREE.Points(geometry, materials[i]);
+
+          particles.rotation.x = Math.random() * 6;
+          particles.rotation.y = Math.random() * 6;
+          particles.rotation.z = Math.random() * 6;
+
+          scene.add(particles);
+        }
+
+        const loader = new FBXLoader();
+        let tree;
+        loader.load("models/fbx/tree.fbx", function (object) {
+          tree = object;
+          object.scale.set(12, 12, 12);
+          console.log(object);
+          object.children[0].material.color = new THREE.Color(0x666666);
+          object.children[1].material.color = new THREE.Color(0x006400);
+          object.children[2].material.color = new THREE.Color(0xffff00);
+          object.children[3].material.color = new THREE.Color(0x8b0000);
+          object.children[4].material.color = new THREE.Color(0xd2691e);
+          scene.add(object);
+        });
+
+        //
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        //纹理按钮控制
+
+        document.body.style.touchAction = "none";
+        // pointermove当指针更改坐标时触发该事件
+        document.body.addEventListener("pointermove", onPointerMove);
+
+        window.addEventListener("resize", onWindowResize);
+      }
+
+      function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function onPointerMove(event) {
+        if (event.isPrimary === false) return;
+
+        mouseX = event.clientX - windowHalfX;
+        mouseY = event.clientY - windowHalfY;
+      }
+
+      //
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        render();
+        stats.update();
+      }
+
+      function render() {
+        const time = Date.now() * 0.00005;
+
+        // camera.position.x += (mouseX - camera.position.x) * 0.05;
+        // camera.position.y += (-mouseY - camera.position.y) * 0.05;
+
+        // camera.lookAt(scene.position);
+
+        for (let i = 0; i < scene.children.length; i++) {
+          const object = scene.children[i];
+
+          if (object instanceof THREE.Points) {
+            object.rotation.y = time * (i < 4 ? i + 1 : -(i + 1));
+          }
+        }
+
+        for (let i = 0; i < materials.length; i++) {
+          const color = parameters[i][0];
+
+          const h = ((360 * (color[0] + time)) % 360) / 360;
+          materials[i].color.setHSL(h, color[1], color[2]);
+        }
+
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>
