@@ -22,6 +22,10 @@ import spotLight from '@/views/spotLight.vue';
 import pointLight from '@/views/pointLight.vue';
 
 import christmas from '@/views/integrated/christmas.vue';
+import car from '@/views/integrated/car.vue';
+import robot from '@/views/integrated/robot.vue';
+import room from '@/views/integrated/room.vue';
+import web3d from '@/views/integrated/web3d.vue';
 
 Vue.use(VueRouter);
 
@@ -136,6 +140,26 @@ const routes = [
     name: 'christmas',
     component: christmas,
   },
+  {
+    path: '/integrated/car',
+    name: 'car',
+    component: car,
+  },
+  {
+    path: '/integrated/robot',
+    name: 'robot',
+    component: robot,
+  },
+  {
+    path: '/integrated/room',
+    name: 'room',
+    component: room,
+  },
+  {
+    path: '/integrated/web3d',
+    name: 'web3d',
+    component: web3d,
+  }
 ];
 
 const router = new VueRouter({
