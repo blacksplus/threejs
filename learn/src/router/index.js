@@ -26,6 +26,10 @@ import car from '@/views/integrated/car.vue';
 import robot from '@/views/integrated/robot.vue';
 import room from '@/views/integrated/room.vue';
 import web3d from '@/views/integrated/web3d.vue';
+import earth3d from '@/views/integrated/earth3d.vue';
+import earthAndMoon from '@/views/integrated/earthAndMoon.vue'
+import font3d from '@/views/integrated/font3d.vue'
+import playball from '@/views/integrated/playball.vue';
 
 Vue.use(VueRouter);
 
@@ -159,6 +163,26 @@ const routes = [
     path: '/integrated/web3d',
     name: 'web3d',
     component: web3d,
+  },
+  {
+    path: '/integrated/earth3d',
+    name: 'earth3d',
+    component: earth3d
+  },
+  {
+    path: '/integrated/earthAndMoon',
+    name: 'earthAndMoon',
+    component: earthAndMoon
+  },
+  {
+    path: '/integrated/font3d',
+    name: 'font3d',
+    component: font3d
+  },
+  {
+    path: '/integrated/playball',
+    name: 'playball',
+    component: playball
   }
 ];
 
