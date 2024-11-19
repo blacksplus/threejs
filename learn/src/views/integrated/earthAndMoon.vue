@@ -106,7 +106,7 @@
         },
     }
 </script>
-<style>
+<style scoped>
     canvas {
         background-image: url(../../../public/integrated/3dearth/starts.jpg) !important;
         background-size: cover;

@@ -30,6 +30,8 @@ import earth3d from '@/views/integrated/earth3d.vue';
 import earthAndMoon from '@/views/integrated/earthAndMoon.vue'
 import font3d from '@/views/integrated/font3d.vue'
 import playball from '@/views/integrated/playball.vue';
+import missile from '@/views/integrated/missile.vue'
+import img2dTo3d from '@/views/integrated/img2dTo3d.vue';
 
 Vue.use(VueRouter);
 
@@ -183,6 +185,16 @@ const routes = [
     path: '/integrated/playball',
     name: 'playball',
     component: playball
+  },
+  {
+    path: '/integrated/missile',
+    name: 'missile',
+    component: missile
+  },
+  {
+    path: '/integrated/img2dTo3d',
+    name: 'img2dTo3d',
+    component: img2dTo3d
   }
 ];
 

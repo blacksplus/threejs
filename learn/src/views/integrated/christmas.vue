@@ -31,8 +31,7 @@
             document.body.appendChild(renderer.domElement);
 
             //设置颜色编码才能开启色调
-            renderer.outputEncoding = THREE.SRGBColorSpace
-
+            renderer.outputColorSpace = THREE.LinearSRGBColorSpace
             //设置色调映射
             renderer.toneMapping = THREE.ACESFilmicToneMapping
             //曝光度
