@@ -32,6 +32,7 @@ import font3d from '@/views/integrated/font3d.vue'
 import playball from '@/views/integrated/playball.vue';
 import missile from '@/views/integrated/missile.vue'
 import img2dTo3d from '@/views/integrated/img2dTo3d.vue';
+import cannones from '@/views/cannon/index.vue'
 
 Vue.use(VueRouter);
 
@@ -195,6 +196,11 @@ const routes = [
     path: '/integrated/img2dTo3d',
     name: 'img2dTo3d',
     component: img2dTo3d
+  },
+  {
+    path: '/integrated/cannones',
+    name: 'cannones',
+    component: cannones
   }
 ];
 
